@@ -45,22 +45,31 @@ namespace OlioEsimerkki
         /// <returns></returns>
         public object Load(string filename)
         {
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            FileStream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.None);
-            object obj = new object();
-            try
+
+            if (File.Exists(filename))
             {
-                obj = binaryFormatter.Deserialize(fileStream);
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+
+
+                FileStream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.None);
+                object obj = new object();
+
+                try
+                {
+                    obj = binaryFormatter.Deserialize(fileStream);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Virhe latauksessa: " + ex.ToString());
+                }
+                finally
+                {
+                    fileStream.Close();
+                }
+
+                return obj;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Virhe latauksessa: " + ex.ToString());
-            }
-            finally
-            {
-                fileStream.Close();
-            }
-            return obj;
+            return null;
         }
     }
 }

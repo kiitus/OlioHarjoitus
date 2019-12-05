@@ -144,7 +144,7 @@ namespace OlioEsimerkki
 
             Console.WriteLine("Give GC code which distance is shown");
             code = Console.ReadLine();
-            int id = myReader.GetCacheID(code);
+            int id = myReader.GetCacheID(code.ToUpper());
 
             if (id != -1)
             {
@@ -188,7 +188,7 @@ namespace OlioEsimerkki
 
             Console.WriteLine("Give GC code which show on map");
             code = Console.ReadLine();
-            int id = myReader.GetCacheID(code);
+            int id = myReader.GetCacheID(code.ToUpper());
 
             if (id != -1)
             {
